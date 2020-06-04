@@ -9,11 +9,12 @@ admin.site.register(Genere)
 admin.site.register(Lingua)
 
 class AutoreAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('cognome','nome','data_nascita','data_morte')
+	
 admin.site.register(Autore,AutoreAdmin)
 
 class LibroAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('titolo','autore','mostra_genere')
 admin.site.register(Libro, LibroAdmin)
 
 class IstanzaAdmin(admin.ModelAdmin):

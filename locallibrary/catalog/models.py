@@ -31,6 +31,15 @@ class Libro(models.Model):
 	def get_absolute_url(self):
 		"""Return the url to access a detail record for this book."""
 		return reverse('book-detail',args=[str(self.id)])
+	
+	def mostra_genere(self):
+		"""Stringa per rappresentare i primi 3 generi, utile alla display_list dell'Admin"""
+		gens = []
+		for gen in self.genere.all()[:3]:
+			gens.append(gen.nome)
+		return ', '.join(gens)
+	
+	mostra_genere.short_description = 'Elenco generi'
 		
 class Istanza(models.Model):
 	"""Modello che rappresenta una specifica copia di un libro, che può ad esempio essere prestata."""
