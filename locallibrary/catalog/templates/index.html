@@ -1,5 +1,8 @@
 {% extends "generic.html" %}
 
+{%block title%}
+<title>Home page</title>
+{%endblock%}
 {% block content %}<h1>Local library home</h1>
 <p>Benvenuto nella Home Page di Ciullini</p>
 <h2>Contenuto dinamico</h2>
@@ -9,5 +12,8 @@
     <li><strong>Autori: </strong>{{n_autori}}</li>
     <li><strong>Copie: </strong>{{n_istanze}}</li>
     <li><strong>Copie disponibili: </strong>{{n_disponibili}}</li>
+    <li>Libri il cui titolo contiene "La"{{n_la}}</li>
+    <li>Genere il cui nome contiene "an"{{n_an}}</li>
+
 </ul>
 {%endblock%}
