@@ -1,0 +1,13 @@
+{% extends "generic.html" %}
+
+{% block content %}<h1>Local library home</h1>
+<p>Benvenuto nella Home Page di Ciullini</p>
+<h2>Contenuto dinamico</h2>
+<p>La libreria ha i seguenti contenuti:</p>
+<ul>
+    <li><strong>Libri: </strong>{{n_libri}}</li>
+    <li><strong>Autori: </strong>{{n_autori}}</li>
+    <li><strong>Copie: </strong>{{n_istanze}}</li>
+    <li><strong>Copie disponibili: </strong>{{n_disponibili}}</li>
+</ul>
+{%endblock%}
