@@ -1,0 +1,36 @@
+{% extends 'generic.html' %}
+{% block content %}
+<h1>{{libro.titolo}}</h1>
+<p><strong>Autore:</strong> <a href="">{{libro.autore}}</a></p>
+<p><strong>Sommario:</strong> {{libro.sommario}}</p>
+<p><strong>ISBN:</strong> {{libro.isbn}}</p>
+<p><strong>Lingua:</strong> {{libro.lingua}}</p>
+<p><strong>Generi:</strong> {{libro.genere.all|join:" ," }}</p>
+
+<div style="margin-left: 20px; margin-top: 20px;">
+<h4>Copie</h4>
+
+{% for copia in libro.istanza_set.all %}
+    <hr>
+    <p class="
+    {% if copia.stato == 'd' %}
+        text-success
+    {% elif copia.stato == 'm' %}
+        text-danger
+    {%else %}
+        text-warning
+    {% endif %}
+        ">{{copia.get_stato_display}}</p>
+    
+    {% if copia.stato != 'd' %}
+        <p><strong>Riconsegna: </strong> {{copia.riconsegna}}</p>
+    {% endif %}
+
+    <p><strong>Imprint:</strong> {{copia.imprint}}</p>
+    <p class="text-muted"><strong>Id:</strong>{{copia.id}} </p>
+        
+{% endfor %}
+    
+</div>
+
+{% endblock content %}
