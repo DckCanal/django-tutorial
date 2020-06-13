@@ -1,4 +1,16 @@
 {% extends 'generic.html' %}
 
+<ul>
+{% for libro in elenco_libri %}
+    <li>
+        <h3><a href="">{{libro.titolo}}</a></h3>
+        <p><a href="">{{libro.autore}}</a></p>
+        <p><strong>Generi: </strong>{{libro.genere.all|join:", "}}</p>
+        <p><italic>{{libro.lingua}}</italic></p>
+    </li>
+{% endfor %}
+</ul>
+    
+
 
     
