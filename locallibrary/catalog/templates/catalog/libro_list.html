@@ -1,16 +1,24 @@
 {% extends 'generic.html' %}
 
-<ul>
-{% for libro in elenco_libri %}
-    <li>
-        <h3><a href="">{{libro.titolo}}</a></h3>
-        <p><a href="">{{libro.autore}}</a></p>
-        <p><strong>Generi: </strong>{{libro.genere.all|join:", "}}</p>
-        <p><italic>{{libro.lingua}}</italic></p>
-    </li>
-{% endfor %}
-</ul>
-    
 
+{% block content %}
+    
+    <h1>Elenco dei libri</h1>
+    {% if elenco_libri %}
+        <ul>
+        {% for libro in elenco_libri %}
+            <li>
+                <!--<h3><a href="{% url 'book-detail' libro.id %}">{{libro.titolo}}</a></h3>-->
+                <h3><a href="{{libro.get_absolute_url}}">{{libro.titolo}}</a></h3> <p><a href="{% url 'author-detail' libro.autore.pk %}">({{libro.autore}})</a></p>
+                <p>{{libro.lingua}} - <strong>Generi: </strong>{{libro.genere.all|join:", "}}</p>
+                
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Non ci sono libri nella biblioteca!</p>
+    {% endif %}    
+{% endblock content %}
+<ul>
 
     

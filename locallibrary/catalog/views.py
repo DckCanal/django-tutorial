@@ -37,6 +37,7 @@ class BookListView(generic.ListView):
     """ListView per la classe models.Libro"""
     model = Libro
     context_object_name = 'elenco_libri'
+    paginate_by = 2
     #queryset = Libro.objects.filter(titolo__contains='Il')
     #template_name = 'catalog/templates/libro_list.html'
     #template di default: /locallibrary/catalog/templates/catalog/libro_list.html
@@ -55,3 +56,9 @@ class BookDetailView(generic.DetailView):
     """DetailView per la classe models.Libro"""
     model = Libro
     #template_name = 'templates/dettaglio_libro.html'
+
+class AutoreListview(generic.ListView):
+    model = Autore
+
+class AutoreDetailView(generic.DetailView):
+    model = Autore
