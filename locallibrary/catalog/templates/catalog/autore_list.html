@@ -1,6 +1,24 @@
 {% extends 'generic.html' %}
     
     {% block content %}
-        <p>Lista autori</p>
+        {% if elenco_autori %}
+        <ul>
+            {% for a in elenco_autori %}
+             <li><p><a href="{%url 'author-detail' pk=a.pk%}">{{a}}</a>
+             
+             {% if a.data_nascita %}
+                , nato il {{ a.data_nascita }}
+             {% endif %}
+             
+             {% if a.data_morte %}
+                , morto il {{ a.data_morte }}
+             {% endif %}
+            </p></li>
+                  
+            {% endfor %}
+        </ul>
+        {% else %}
+            <h2>Non ci sono autori nella libreria.</h2>
+        {% endif %} 
     {% endblock content %}
         

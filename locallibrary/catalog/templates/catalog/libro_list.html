@@ -10,7 +10,7 @@
             <li>
                 <!--<h3><a href="{% url 'book-detail' libro.id %}">{{libro.titolo}}</a></h3>-->
                 <h3><a href="{{libro.get_absolute_url}}">{{libro.titolo}}</a></h3> <p><a href="{% url 'author-detail' libro.autore.pk %}">({{libro.autore}})</a></p>
-                <p>{{libro.lingua}} - <strong>Generi: </strong>{{libro.genere.all|join:", "}}</p>
+                <p>{{libro.lingua}} - <strong>Generi: </strong>{{libro.genere.all|join:", "}}<!--- <a href="{ url 'pref' libro.pk %}">Imposta come preferito</a></p>-->
                 
             </li>
         {% endfor %}
