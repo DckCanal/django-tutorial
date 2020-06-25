@@ -1,0 +1,16 @@
+{% extends 'generic.html' %}
+
+{% block content %}
+    <h1>Libri in prestito</h1>
+    {% if istanza_list %}
+    <ul>
+        {% for i in istanza_list %}
+            <li class="{% if i.is_overdue %}text-danger{% endif %}">
+                <a href="{% url 'book-detail' i.libro.pk %}">{{i.libro.titolo}}</a> ({{i.riconsegna}})
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>Non hai alcun libro in prestito.</p>
+    {% endif %}
+{% endblock content %}

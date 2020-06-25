@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Autore, Libro, Istanza, Genere
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 # Create your views here.
 
@@ -80,3 +81,21 @@ class AutoreListview(generic.ListView):
 
 class AutoreDetailView(generic.DetailView):
     model = Autore
+
+
+class LoanedBookByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Istanza
+    template_name = 'catalog/bookinstance_list_borrowed_user.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        return Istanza.objects.filter(borrower=self.request.user).filter(stato__exact='p').order_by('riconsegna')
+
+class LoanedBookByLibrarianListView(PermissionRequiredMixin, generic.ListView):
+    model = Istanza
+    template_name = 'catalog/bookinstance_list_borrowed_librarian.html'
+    paginate_by = 10
+    permission_required = 'catalog.can_mark_returned'
+    
+    def get_queryset(self):
+        return Istanza.objects.filter(stato__exact='p').order_by('riconsegna')
