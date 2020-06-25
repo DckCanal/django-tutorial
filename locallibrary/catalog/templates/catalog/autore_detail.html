@@ -1,0 +1,8 @@
+{% extends 'generic.html' %}
+
+{% block content %}
+    Vista dettagliata dell'autore {{object}} {% if object.data_nascita %} nato il {{object.data_nascita}} {%endif%}{%if object.data_morte%}, morto il {{object.data_morte}}{%endif%}
+    {% for libro in autore.libro_set.all %}
+        <hr><a href="{{libro.get_absolute_url}}">{{libro.titolo}}</a>
+    {% endfor %}
+{% endblock content %}

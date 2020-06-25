@@ -16,4 +16,12 @@
     <li>Genere il cui nome contiene "an"{{n_an}}</li>
 
 </ul>
+
+<p>Hai visitato questa pagina {{num_visit}}
+    {% if num_visit == 1 %}
+    volta
+    {% else %}
+    volte
+    {% endif %}
+</p>
 {%endblock%}
