@@ -1,0 +1,16 @@
+{% extends "generic.html" %}
+{% block content %}
+<h1>Book list</h1>
+
+    {% if elenco_libri %}
+        <ul>
+            {% for libro in elenco_libri %}
+                <li><a href = "{{libro.get_absolute_url}}">{{libro.titolo}}</a> ({{libro.autore}})
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Non ci sono libri nella biblioteca.</p>
+    {% endif %}
+    <!--<h2>{{elenco_libri.VariabileCiullosaii}}</h2>-->
+
+{% endblock content %}
