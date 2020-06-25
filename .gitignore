@@ -1,0 +1,4 @@
+.vscode
+locallibrary/locallibrary/__pycache__/
+locallibrary/catalog/__pycache__/
+locallibrary/catalog/migrations/
