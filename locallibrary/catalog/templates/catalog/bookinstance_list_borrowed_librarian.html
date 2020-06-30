@@ -7,6 +7,7 @@
         {% for i in istanza_list %}
             <li class="{% if i.is_overdue %}text-danger{% endif %}">
                 <a href="{% url 'book-detail' i.libro.pk %}">{{ i.libro.titolo }}</a> ({{ i.riconsegna }}) - {{ i.borrower.get_username }}
+                {% if perms.catalog.can_renew %} - <a href="{% url 'renew-book-librarian' i.id %}">Renew</a> {% endif %}
             </li>
         {% endfor %}
     </ul>

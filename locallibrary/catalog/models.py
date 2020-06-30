@@ -80,7 +80,10 @@ class Istanza(models.Model):
 
     class Meta:
         ordering = ['riconsegna']
-        permissions = (('can_mark_returned', 'Set book as returned'),)
+        permissions = (('can_mark_returned', 'Set book as returned'),
+                        ('can_renew','Change dueback date')
+        
+        )
         
 
     def __str__(self):

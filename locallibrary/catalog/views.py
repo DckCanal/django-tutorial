@@ -1,7 +1,12 @@
-from django.shortcuts import render
+import datetime
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Autore, Libro, Istanza, Genere
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from catalog.forms import RenewBookForm
 
 # Create your views here.
 
@@ -99,3 +104,29 @@ class LoanedBookByLibrarianListView(PermissionRequiredMixin, generic.ListView):
     
     def get_queryset(self):
         return Istanza.objects.filter(stato__exact='p').order_by('riconsegna')
+
+@permission_required('catalog.can_renew')
+def renew_book_librarian(request,pk):
+    book_instance = get_object_or_404(Istanza, pk=pk)
+
+    #Not first request, form already populated by user
+    if request.method == 'POST':
+        #Binding form
+        form = RenewBookForm(request.POST)
+        if form.is_valid():
+            book_instance.riconsegna = form.cleaned_data['renewal_date']
+            book_instance.save()
+            return HttpResponseRedirect(reverse('borrowed'))
+    #First request
+    else:
+        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        form = RenewBookForm(initial = {
+            'renewal_date' : proposed_renewal_date
+        })
+
+    context = {
+        'form' : form,
+        'book_instance' : book_instance
+    }
+    
+    return render(request,'catalog/book_renew_librarian.html',context)
